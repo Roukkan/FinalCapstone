@@ -1,0 +1,54 @@
+.createRecipe {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  background-color: rgb(236, 80, 80);
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  width: 400px;
+  border-color: black;
+  border-style: double;
+}
+.createRecipe form {
+  display: flex;
+  flex-direction: column;
+  background-color: blueviolet;
+}
+
+.recipeInput {
+  padding: 10px 0px;
+  font-size: 16px;
+  border-radius: 5px;
+  margin: 0px 0px;
+  height: 15px;
+}
+
+.btn {
+  border: none;
+  padding: 10px 20px;
+  background-color: rgb(126, 77, 4);
+  border-radius: 8px;
+  width: 100%;
+  color: white;
+  margin: 10px 0px;
+}
+
+.del {
+  border: none;
+  background-color: rgb(184, 23, 23);
+  width: 20px;
+  padding: 0px;
+  margin: 8px 0px;
+  cursor: pointer;
+  float: right;
+}
+
+.Mealselect {
+  padding: 10px;
+  font-size: 15px;
+  border-radius: 5px;
+  margin: 0px 0px;
+}

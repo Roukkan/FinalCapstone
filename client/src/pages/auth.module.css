@@ -1,0 +1,53 @@
+.toggl {
+  color: blue;
+  cursor: pointer;
+}
+
+.loginChange {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 6px 7px 5px rgba(0, 0, 0, 0.3);
+  width: fit-content;
+  border-style: groove;
+  margin-top: 20px;
+}
+
+.authToggle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.para {
+  margin-top: 0px;
+  font-size: 15px;
+}
+
+.authContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.btn {
+  border-style: none;
+  border-radius: 5px;
+  background-color: rgb(126, 77, 4);
+  padding: 5px 10px;
+  width: 100%;
+  color: #ffffff;
+}
+
+.head {
+  color: rgb(109, 66, 2);
+}
