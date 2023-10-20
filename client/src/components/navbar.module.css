@@ -15,7 +15,14 @@
   border: none;
   color: white;
   height: 100%;
-  font-size: 25px;
+  font-size: 17px;
   padding-top: 7px;
   cursor: pointer;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  margin: 10px;
+  font-size: 17px;
 }

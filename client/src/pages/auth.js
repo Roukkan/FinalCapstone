@@ -102,7 +102,6 @@ const Register = () => {
       });
       alert("Registration Complete!");
 
-      // Clear input fields after successful registration
       setUsername("");
       setPassword("");
       setConfirmPassword("");
@@ -146,6 +145,7 @@ const Form = ({
             id="username"
             value={username}
             onChange={(event) => setUsername(event.target.value)}
+            className={AUTHCSS.Input}
           />
         </div>
         <div className={AUTHCSS.formGroup}>
@@ -155,6 +155,7 @@ const Form = ({
             id="password"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
+            className={AUTHCSS.Input}
           />
         </div>
         {label === "Register" && (
@@ -165,6 +166,7 @@ const Form = ({
               id="confirmPassword"
               value={confirmPassword}
               onChange={(event) => setConfirmPassword(event.target.value)}
+              className={AUTHCSS.Input}
             />
           </div>
         )}

@@ -51,3 +51,11 @@
 .head {
   color: rgb(109, 66, 2);
 }
+
+.Input {
+  padding: 10px 0px;
+  font-size: 16px;
+  border-radius: 5px;
+  margin: 0px 0px;
+  height: 15px;
+}

@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import CREATECSS from "./create-recipe.module.css";
 import { MdDeleteForever } from "react-icons/md";
-import InputAdornment from "@mui/material/InputAdornment";
 
 export const CreateRecipe = () => {
   const userID = useGetUserID();
@@ -191,7 +190,7 @@ export const CreateRecipe = () => {
               onClick={() => handleDeleteIngredient(idx)}
               className={CREATECSS.del}
             >
-              <MdDeleteForever size={20} />
+              <MdDeleteForever size={20} color="red" />
             </button>
           </div>
         ))}
@@ -214,7 +213,7 @@ export const CreateRecipe = () => {
               onClick={() => handleDeleteInstruction(idx)}
               className={CREATECSS.del}
             >
-              <MdDeleteForever />
+              <MdDeleteForever size={20} color="red" />
             </button>
           </div>
         ))}

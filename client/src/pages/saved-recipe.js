@@ -3,10 +3,8 @@ import axios from "axios";
 import { useGetUserID } from "../hooks/useGetUserID";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import { TextField } from "@mui/material";
-import { MdSearch } from "react-icons/md";
 import SAVEDCSS from "./saved-recipe.module.css";
-import { MdBookmarkAdded, MdBookmarkBorder } from "react-icons/md";
+import { MdBookmarkAdded } from "react-icons/md";
 
 const modalStyle = {
   position: "absolute",
@@ -20,13 +18,6 @@ const modalStyle = {
   p: 4,
   maxHeight: "80vh",
   overflowY: "auto",
-};
-
-const searchStyle = {
-  position: "absolute",
-  top: "90px",
-  right: "20px",
-  zIndex: 999,
 };
 
 export const SavedRecipe = () => {
