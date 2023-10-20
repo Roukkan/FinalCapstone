@@ -123,9 +123,8 @@ export const Home = () => {
         </div>
       </div>
 
-      <div className="HOMECSS.recipes">
-        <h1>Recipes</h1>
-
+      <div className={HOMECSS.recipes}>
+        <h1 className={HOMECSS.Head}>Recipes</h1>
         <ul>
           {filteredRecipes.map((recipe) => (
             <li key={recipe._id} className={HOMECSS.recipeList}>
