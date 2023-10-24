@@ -6,6 +6,7 @@ import NAVBARCSS from "../components/navbar.module.css";
 
 export const Navbar = () => {
   const [cookies, setCookies] = useCookies(["access_token"]);
+
   const navigate = useNavigate();
   const logout = () => {
     setCookies("access_token", "");
