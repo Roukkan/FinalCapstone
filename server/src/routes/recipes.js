@@ -59,4 +59,46 @@ router.get("/savedRecipes/:userID", async (req, res) => {
   }
 });
 
+router.delete("/savedRecipes/:userID/:recipeID", async (req, res) => {
+  try {
+    const { userID, recipeID } = req.params;
+
+    const user = await UserModel.findById(userID);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const recipeIndex = user.savedRecipes.indexOf(recipeID);
+
+    if (recipeIndex === -1) {
+      return res
+        .status(404)
+        .json({ message: "Recipe not found in user's saved recipes" });
+    }
+
+    user.savedRecipes.splice(recipeIndex, 1);
+
+    await user.save();
+
+    res.json({ message: "Recipe deleted successfully" });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+router.get("/recipe/:recipeId/user-count", async (req, res) => {
+  const { recipeId } = req.params;
+
+  try {
+    const userCount = await UserModel.countDocuments({
+      savedRecipes: recipeId,
+    });
+
+    res.json({ userCount });
+  } catch (error) {
+    res.status(500).json({ error: "Unable to get user count" });
+  }
+});
+
 export { router as recipesRouter };

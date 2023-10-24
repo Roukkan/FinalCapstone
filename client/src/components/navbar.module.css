@@ -16,7 +16,7 @@
   color: white;
   height: 100%;
   font-size: 17px;
-  padding-top: 7px;
+  padding-top: 4.9px;
   cursor: pointer;
 }
 
@@ -25,4 +25,22 @@ a {
   text-decoration: none;
   margin: 10px;
   font-size: 17px;
+}
+
+@media (max-width: 380px) {
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    margin: 0px;
+    padding: 0px;
+  }
+
+  a {
+    margin: 5px 0;
+  }
+
+  .login {
+    width: 100%;
+    height: 30px;
+  }
 }

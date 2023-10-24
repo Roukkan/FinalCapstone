@@ -7,22 +7,12 @@ import Box from "@mui/material/Box";
 import { TextField } from "@mui/material";
 import { MdSearch } from "react-icons/md";
 import HOMECSS from "./home.module.css";
-import { MdBookmarkAdded, MdBookmarkBorder } from "react-icons/md";
+import {
+  MdBookmarkAdded,
+  MdBookmarkBorder,
+  MdOutlinePeopleOutline,
+} from "react-icons/md";
 import InputAdornment from "@mui/material/InputAdornment";
-
-const modalStyle = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  bgcolor: "background.paper",
-  border: "1px solid #000",
-  boxShadow: 24,
-  p: 4,
-  maxHeight: "80vh",
-  overflowY: "auto",
-};
 
 export const Home = () => {
   const [recipes, setRecipes] = useState([]);
@@ -32,6 +22,7 @@ export const Home = () => {
   const [modalData, setModalData] = useState(null);
   const [open, setOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [userCounts, setUserCounts] = useState({});
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -60,6 +51,26 @@ export const Home = () => {
 
   const handleOpen = () => setOpen(true);
 
+  useEffect(() => {
+    recipes.forEach((recipe) => {
+      fetchUserCount(recipe._id);
+    });
+  }, [recipes]);
+
+  const fetchUserCount = async (recipeID) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3001/recipes/recipe/${recipeID}/user-count`
+      );
+      setUserCounts((prevCounts) => ({
+        ...prevCounts,
+        [recipeID]: response.data.userCount,
+      }));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const saveRecipe = async (recipeID) => {
     try {
       const response = await axios.put(
@@ -71,6 +82,11 @@ export const Home = () => {
         { headers: { authorization: cookies.access_token } }
       );
       setSavedRecipes(response.data.savedRecipes);
+
+      setUserCounts((prevCounts) => ({
+        ...prevCounts,
+        [recipeID]: prevCounts[recipeID] + 1,
+      }));
     } catch (err) {
       console.error(err);
     }
@@ -130,17 +146,28 @@ export const Home = () => {
             <li key={recipe._id} className={HOMECSS.recipeList}>
               <div className={HOMECSS.fav}>
                 <h2 className={HOMECSS.recipeHead}>{recipe.name}</h2>
-                <button
-                  onClick={() => saveRecipe(recipe._id)}
-                  disabled={isRecipeSaved(recipe._id)}
-                  className={HOMECSS.addBtn}
-                >
-                  {isRecipeSaved(recipe._id) ? (
-                    <MdBookmarkAdded size="30px" color="brown" />
-                  ) : (
-                    <MdBookmarkBorder size="30px" color="brown" />
-                  )}
-                </button>
+              </div>
+
+              <div className={HOMECSS.action}>
+                <p className={HOMECSS.counter}>
+                  <MdOutlinePeopleOutline
+                    size="30px"
+                    color="brown"
+                    className={HOMECSS.ppl}
+                  />
+                  {userCounts[recipe._id] || 0}{" "}
+                  <button
+                    onClick={() => saveRecipe(recipe._id)}
+                    disabled={isRecipeSaved(recipe._id)}
+                    className={HOMECSS.addBtn}
+                  >
+                    {isRecipeSaved(recipe._id) ? (
+                      <MdBookmarkAdded size="30px" color="brown" />
+                    ) : (
+                      <MdBookmarkBorder size="30px" color="brown" />
+                    )}
+                  </button>
+                </p>
               </div>
 
               <img
@@ -148,7 +175,7 @@ export const Home = () => {
                 alt={recipe.name}
                 className={HOMECSS.foodImg}
               />
-              <div className={HOMECSS.instructions}>
+              <div className={HOMECSS.description}>
                 <p>{recipe.description}</p>
               </div>
               <div>
@@ -170,10 +197,10 @@ export const Home = () => {
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
           >
-            <Box sx={modalStyle}>
+            <Box className={HOMECSS.mdl}>
               {modalData && (
                 <>
-                  <div>
+                  <div className={HOMECSS.divs}>
                     <h2>{modalData.name}</h2>
                     <img
                       src={modalData.imageUrl}
@@ -183,9 +210,9 @@ export const Home = () => {
                     <p> Cooking Time: {modalData.cookingTime} (minutes)</p>
                   </div>
 
-                  <div>
+                  <div className={HOMECSS.divs}>
                     <h3>Ingredients</h3>
-                    <ul>
+                    <ul className={HOMECSS.lst}>
                       {modalData.ingredients.map((ingredient, index) => (
                         <li key={index}>
                           <input
@@ -193,15 +220,15 @@ export const Home = () => {
                             type="checkbox"
                             className={HOMECSS.chk}
                           />
-                          <label htmlFor="chk">{ingredient}</label>
+                          <label>{ingredient}</label>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div>
+                  <div className={HOMECSS.divs}>
                     <h3>Instructions</h3>
-                    <ol>
+                    <ol className={HOMECSS.instruct}>
                       {modalData.instructions.map((instruction, index) => (
                         <li key={index}>{instruction}</li>
                       ))}

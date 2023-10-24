@@ -19,6 +19,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-bottom: 20px;
 }
 
 .para {
@@ -31,31 +32,36 @@
   justify-content: center;
   align-items: center;
   margin: 20px;
+  padding: 0px 10px;
 }
 
 .formGroup {
   display: flex;
   flex-direction: column;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .btn {
   border-style: none;
   border-radius: 5px;
   background-color: rgb(126, 77, 4);
-  padding: 5px 10px;
+  padding: 10px 10px;
   width: 100%;
   color: #ffffff;
+  margin-top: 20px;
 }
 
 .head {
   color: rgb(109, 66, 2);
+  margin-top: -10px;
+  padding-bottom: 20px;
 }
 
 .Input {
   padding: 10px 0px;
-  font-size: 16px;
+  font-size: 15px;
   border-radius: 5px;
   margin: 0px 0px;
-  height: 15px;
+  height: 40px;
+  width: 100%;
 }

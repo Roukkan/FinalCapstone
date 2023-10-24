@@ -142,111 +142,124 @@ export const CreateRecipe = () => {
   };
 
   return (
-    <div className={CREATECSS.createRecipe}>
-      <h2>Create Recipe</h2>
-      <form onSubmit={onSubmit}>
-        <label htmlFor="name">Name</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          onChange={handleChange}
-          className={CREATECSS.recipeInput}
-        />
+    <div className={CREATECSS.recipeCard}>
+      <div className={CREATECSS.createRecipe}>
+        <h2>Create Recipe</h2>
+        <form onSubmit={onSubmit}>
+          <label htmlFor="name" className={CREATECSS.lbl}>
+            Name
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            onChange={handleChange}
+            className={CREATECSS.recipeInput}
+          />
 
-        <label htmlFor="mealType">Meal Type</label>
-        <select
-          onChange={setSelectedOption}
-          defaultValue={option.value}
-          className={CREATECSS.Mealselect}
-        >
-          {selectOptions.map((option) => (
-            <option value={option.value} key={option.value}>
-              {option.label}
-            </option>
+          <label htmlFor="mealType" className={CREATECSS.lbl}>
+            Meal Type
+          </label>
+          <select
+            onChange={setSelectedOption}
+            defaultValue={option.value}
+            className={CREATECSS.Mealselect}
+            id="mealType"
+          >
+            {selectOptions.map((option) => (
+              <option value={option.value} key={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+
+          <label htmlFor="description" className={CREATECSS.lbl}>
+            Description
+          </label>
+          <textarea
+            id="description"
+            name="description"
+            onChange={handleChange}
+            className={CREATECSS.recipeInput}
+          ></textarea>
+
+          <label className={CREATECSS.lbl}>Ingredients</label>
+          {recipe.ingredients.map((ingredient, idx) => (
+            <div key={idx}>
+              <input
+                type="text"
+                name="ingredients"
+                value={ingredient}
+                onChange={(event) => handleIngredientChange(event, idx)}
+                className={CREATECSS.recipeInput}
+              />
+              <button
+                type="button"
+                onClick={() => handleDeleteIngredient(idx)}
+                className={CREATECSS.del}
+              >
+                <MdDeleteForever size={20} color="red" />
+              </button>
+            </div>
           ))}
-        </select>
+          <button
+            onClick={addIngredient}
+            type="button"
+            className={CREATECSS.btn}
+          >
+            Add Ingredient
+          </button>
 
-        <label htmlFor="description">Description</label>
-        <textarea
-          id="description"
-          name="description"
-          onChange={handleChange}
-          className={CREATECSS.recipeInput}
-        ></textarea>
+          <label className={CREATECSS.lbl}>Instructions</label>
+          {recipe.instructions.map((instruction, idx) => (
+            <div key={idx}>
+              <input
+                type="text"
+                name="instructions"
+                value={instruction}
+                onChange={(event) => handleInstructionChange(event, idx)}
+                className={CREATECSS.recipeInput}
+              />
+              <button
+                type="button"
+                onClick={() => handleDeleteInstruction(idx)}
+                className={CREATECSS.del}
+              >
+                <MdDeleteForever size={20} color="red" />
+              </button>
+            </div>
+          ))}
+          <button
+            onClick={addInstruction}
+            type="button"
+            className={CREATECSS.btn}
+          >
+            Add Instructions
+          </button>
 
-        <label htmlFor="ingredients">Ingredients</label>
-        {recipe.ingredients.map((ingredient, idx) => (
-          <div key={idx}>
-            <input
-              type="text"
-              name="ingredients"
-              value={ingredient}
-              onChange={(event) => handleIngredientChange(event, idx)}
-              className={CREATECSS.recipeInput}
-            />
-            <button
-              type="button"
-              onClick={() => handleDeleteIngredient(idx)}
-              className={CREATECSS.del}
-            >
-              <MdDeleteForever size={20} color="red" />
-            </button>
-          </div>
-        ))}
-        <button onClick={addIngredient} type="button" className={CREATECSS.btn}>
-          Add Ingredient
-        </button>
+          <label htmlFor="imageUrl">Image Url</label>
+          <input
+            type="text"
+            id="imageUrl"
+            name="imageUrl"
+            onChange={handleChange}
+            className={CREATECSS.recipeInput}
+          />
 
-        <label htmlFor="instructions">Instructions</label>
-        {recipe.instructions.map((instruction, idx) => (
-          <div key={idx}>
-            <input
-              type="text"
-              name="instructions"
-              value={instruction}
-              onChange={(event) => handleInstructionChange(event, idx)}
-              className={CREATECSS.recipeInput}
-            />
-            <button
-              type="button"
-              onClick={() => handleDeleteInstruction(idx)}
-              className={CREATECSS.del}
-            >
-              <MdDeleteForever size={20} color="red" />
-            </button>
-          </div>
-        ))}
-        <button
-          onClick={addInstruction}
-          type="button"
-          className={CREATECSS.btn}
-        >
-          Add Instructions
-        </button>
+          <label htmlFor="cookingTime">Cooking Time (minutes)</label>
+          <input
+            type="number"
+            id="cookingTime"
+            name="cookingTime"
+            onChange={handleChange}
+            className={CREATECSS.recipeInput}
+          />
 
-        <label htmlFor="imageUrl">Image Url</label>
-        <input
-          type="text"
-          id="imageUrl"
-          name="imageUrl"
-          onChange={handleChange}
-          className={CREATECSS.recipeInput}
-        />
-
-        <label htmlFor="cookingTime">Cooking Time (minutes)</label>
-        <input
-          type="number"
-          id="cookingTime"
-          name="cookingTime"
-          onChange={handleChange}
-          className={CREATECSS.recipeInput}
-        />
-
-        <button type="submit" className={CREATECSS.btn}>
-          Create Recipe
-        </button>
-      </form>
+          <button type="submit" className={CREATECSS.btn}>
+            Create Recipe
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

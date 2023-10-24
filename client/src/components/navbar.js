@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
+import React from "react";
 import NAVBARCSS from "../components/navbar.module.css";
 
 export const Navbar = () => {
@@ -22,9 +22,7 @@ export const Navbar = () => {
         <>
           <Link to="/create-recipe">Create Recipe</Link>
           <Link to="/saved-recipe">Saved Recipes</Link>
-          <button onClick={logout} className={NAVBARCSS.login}>
-            Logout
-          </button>
+          <Link onClick={logout}>Logout</Link>
         </>
       )}
     </div>

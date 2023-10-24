@@ -1,11 +1,12 @@
 .recipeList {
   border: 1px solid rgb(66, 36, 1);
   padding: 15px;
-  margin-bottom: 10px;
   border-radius: 12px;
+  margin: -25px 10px 50px 10px;
   box-shadow: 6px 7px 5px rgba(66, 36, 1, 0.3);
-  margin: 40px;
+  background-color: white;
 }
+
 ul {
   list-style: none;
   padding: 0;
@@ -36,7 +37,7 @@ img {
 }
 
 .addBtn {
-  background-color: rgb(255, 255, 255);
+  background-color: rgba(255, 255, 255, 0.013);
   border: none;
   padding-top: 0px;
   margin: 0px;
@@ -60,4 +61,55 @@ div::-webkit-scrollbar {
 input[type="checkbox"]:checked + label {
   color: rgb(143, 77, 2);
   text-decoration: line-through;
+}
+
+.Head {
+  margin: 10px 10px 0px 10px;
+  padding-bottom: 35px;
+}
+
+.instruct {
+  padding: 5px 15px;
+}
+
+.search {
+  display: block;
+  width: 100%;
+  margin: 0px 40px 0px 20px;
+}
+
+@media screen and (min-width: 480px) {
+  .mdl {
+   width: 400px;
+  }
+}
+
+
+.txtBox {
+  float: right;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.mdl {
+  background-color: rgba(255, 255, 255);
+  border-radius: 12px;
+  overflow-y: auto;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-height: 80vh;
+  padding: 15px;
+  min-width: 300px;
+}
+
+.divs, .lst {
+padding: 10px 0px;
+}
+
+.description {
+  padding-bottom: 20px;
 }

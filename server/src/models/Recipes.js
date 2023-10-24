@@ -13,6 +13,7 @@ const RecipeSchema = new mongoose.Schema({
     ref: "users",
     required: true,
   },
+  saveCount: { type: Number },
 });
 
 export const RecipeModel = mongoose.model("Recipes", RecipeSchema);
