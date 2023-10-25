@@ -7,8 +7,6 @@
   background-color: rgb(255, 255, 255);
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-  /* margin-top: 10px;
-  margin-bottom: 40px; */
   margin: 10px 20px 40px 20px;
   width: fit-content;
   border-color: rgb(59, 34, 0);
@@ -26,7 +24,7 @@
 .createRecipe form {
   display: flex;
   flex-direction: column;
-  background-color: rgb(248, 248, 248);
+  background-color: rgb(255, 255, 255);
 }
 
 .recipeInput {
@@ -34,7 +32,7 @@
   font-size: 17px;
   border-radius: 4px;
   margin: 0px 0px 7px 0px;
-  height: 30px;
+  height: 38px;
   width: 250px;
 }
 

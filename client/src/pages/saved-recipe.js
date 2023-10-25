@@ -5,7 +5,11 @@ import { useCookies } from "react-cookie";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import SAVEDCSS from "./saved-recipe.module.css";
-import { MdBookmarkAdded, MdBookmarkBorder } from "react-icons/md";
+import {
+  MdBookmarkAdded,
+  MdBookmarkBorder,
+  MdBookmarkRemove,
+} from "react-icons/md";
 import { TextField } from "@mui/material";
 import { MdSearch } from "react-icons/md";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -57,10 +61,22 @@ export const SavedRecipe = () => {
 
   const isRecipeSaved = (id) => savedRecipes.includes(id);
 
+  const filteredRecipes = savedRecipes.filter((recipe) => {
+    const { name, mealType, ingredients } = recipe;
+
+    return (
+      name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      mealType.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      ingredients.some((ingredient) =>
+        ingredient.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    );
+  });
+
   return (
     <>
       <div className={SAVEDCSS.search}>
-        <div>
+        <div className={SAVEDCSS.fixedSearch}>
           <TextField
             type="text"
             placeholder="Search..."
@@ -72,8 +88,8 @@ export const SavedRecipe = () => {
             className={SAVEDCSS.txtBox}
             InputProps={{
               startAdornment: (
-                <InputAdornment position="end">
-                  <MdSearch size={20} color="red" className={SAVEDCSS.icn} />
+                <InputAdornment position="start">
+                  <MdSearch size={20} className={SAVEDCSS.srch} />
                 </InputAdornment>
               ),
             }}
@@ -83,43 +99,48 @@ export const SavedRecipe = () => {
 
       <div className={SAVEDCSS.recipes}>
         <h1 className={SAVEDCSS.Head}>My Favorite Recipes</h1>
-        <ul>
-          {savedRecipes.map((recipe) => (
-            <li key={recipe._id} className={SAVEDCSS.recipeList}>
-              <div className={SAVEDCSS.fav}>
-                <h2 className={SAVEDCSS.recipeHead}>{recipe.name}</h2>
-                <button
-                  className={SAVEDCSS.addBtn}
-                  onClick={() => deleteSavedRecipe(recipe._id)}
-                >
-                  {isRecipeSaved(recipe._id) ? (
-                    <MdBookmarkBorder size="30px" color="brown" />
-                  ) : (
-                    <MdBookmarkAdded size="30px" color="brown" />
-                  )}
-                </button>
-              </div>
+        {filteredRecipes.length === 0 ? (
+          <div className={SAVEDCSS.errmsg}>
+            <p className={SAVEDCSS.result}>No matching recipes found!</p>
+          </div>
+        ) : (
+          <ul>
+            {filteredRecipes.map((recipe) => (
+              <li key={recipe._id} className={SAVEDCSS.recipeList}>
+                <div className={SAVEDCSS.fav}>
+                  <h2 className={SAVEDCSS.recipeHead}>{recipe.name}</h2>
+                  <button
+                    className={SAVEDCSS.addBtn}
+                    onClick={() => deleteSavedRecipe(recipe._id)}
+                  >
+                    {isRecipeSaved(recipe._id) ? (
+                      <MdBookmarkRemove size="30px" className={SAVEDCSS.icn} />
+                    ) : (
+                      <MdBookmarkRemove size="30px" className={SAVEDCSS.icn} />
+                    )}
+                  </button>
+                </div>
 
-              <img
-                src={recipe.imageUrl}
-                alt={recipe.name}
-                className={SAVEDCSS.foodImg}
-              />
-              <div className={SAVEDCSS.description}>
-                <p>{recipe.description}</p>
-              </div>
-              <div>
-                <button
-                  onClick={() => openModal(recipe)}
-                  className={SAVEDCSS.view}
-                >
-                  View Recipe
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-
+                <img
+                  src={recipe.imageUrl}
+                  alt={recipe.name}
+                  className={SAVEDCSS.foodImg}
+                />
+                <div className={SAVEDCSS.description}>
+                  <p>{recipe.description}</p>
+                </div>
+                <div>
+                  <button
+                    onClick={() => openModal(recipe)}
+                    className={SAVEDCSS.view}
+                  >
+                    View Recipe
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
         <div>
           <Modal
             open={open}
@@ -131,26 +152,31 @@ export const SavedRecipe = () => {
               {modalData && (
                 <>
                   <div className={SAVEDCSS.divs}>
-                    <h2>{modalData.name}</h2>
+                    <h2 className={SAVEDCSS.name}>{modalData.name}</h2>
                     <img
                       src={modalData.imageUrl}
                       alt={modalData.name}
                       style={{ maxWidth: "100%" }}
                     />
-                    <p> Cooking Time: {modalData.cookingTime} (minutes)</p>
+                    <p className={SAVEDCSS.time}>
+                      Cooking Time: {modalData.cookingTime} (minutes)
+                    </p>
                   </div>
 
                   <div className={SAVEDCSS.divs}>
                     <h3>Ingredients</h3>
                     <ul>
                       {modalData.ingredients.map((ingredient, index) => (
-                        <li key={index}>
+                        <li key={index} className={SAVEDCSS.chklist}>
                           <input
                             value={ingredient}
+                            id={ingredient}
                             type="checkbox"
                             className={SAVEDCSS.chk}
                           />
-                          <label htmlFor="chk">{ingredient}</label>
+                          <label className={SAVEDCSS.lst} htmlFor={ingredient}>
+                            {ingredient}
+                          </label>
                         </li>
                       ))}
                     </ul>
@@ -160,7 +186,9 @@ export const SavedRecipe = () => {
                     <h3>Instructions</h3>
                     <ol className={SAVEDCSS.instruct}>
                       {modalData.instructions.map((instruction, index) => (
-                        <li key={index}>{instruction}</li>
+                        <li key={index} className={SAVEDCSS.items}>
+                          {instruction}
+                        </li>
                       ))}
                     </ol>
                   </div>

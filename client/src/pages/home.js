@@ -118,20 +118,18 @@ export const Home = () => {
   return (
     <>
       <div className={HOMECSS.search}>
-        <div>
+        <div className={HOMECSS.fixedSearch}>
           <TextField
             type="text"
             placeholder="Search..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            variant="outlined"
             size="small"
-            margin="normal"
             className={HOMECSS.txtBox}
             InputProps={{
               startAdornment: (
-                <InputAdornment position="end">
-                  <MdSearch size={20} color="red" className={HOMECSS.icn} />
+                <InputAdornment position="start">
+                  <MdSearch size={20} className={HOMECSS.srch} />
                 </InputAdornment>
               ),
             }}
@@ -141,55 +139,65 @@ export const Home = () => {
 
       <div className={HOMECSS.recipes}>
         <h1 className={HOMECSS.Head}>Recipes</h1>
-        <ul>
-          {filteredRecipes.map((recipe) => (
-            <li key={recipe._id} className={HOMECSS.recipeList}>
-              <div className={HOMECSS.fav}>
-                <h2 className={HOMECSS.recipeHead}>{recipe.name}</h2>
-              </div>
+        {filteredRecipes.length === 0 ? (
+          <div className={HOMECSS.errmsg}>
+            <p className={HOMECSS.result}>No matching recipes found!</p>
+          </div>
+        ) : (
+          <ul>
+            {filteredRecipes.map((recipe) => (
+              <li key={recipe._id} className={HOMECSS.recipeList}>
+                <div className={HOMECSS.fav}>
+                  <h2 className={HOMECSS.recipeHead}>{recipe.name}</h2>
+                </div>
 
-              <div className={HOMECSS.action}>
-                <p className={HOMECSS.counter}>
-                  <MdOutlinePeopleOutline
-                    size="30px"
-                    color="brown"
-                    className={HOMECSS.ppl}
-                  />
-                  {userCounts[recipe._id] || 0}{" "}
+                <div className={HOMECSS.action}>
+                  <p className={HOMECSS.counter}>
+                    <MdOutlinePeopleOutline
+                      size="30px"
+                      className={HOMECSS.ppl}
+                    />
+                    {userCounts[recipe._id] || 0}{" "}
+                    <button
+                      onClick={() => saveRecipe(recipe._id)}
+                      disabled={isRecipeSaved(recipe._id)}
+                      className={HOMECSS.addBtn}
+                    >
+                      {isRecipeSaved(recipe._id) ? (
+                        <MdBookmarkAdded
+                          size="30px"
+                          className={HOMECSS.addedIcon}
+                        />
+                      ) : (
+                        <MdBookmarkBorder
+                          size="30px"
+                          className={HOMECSS.addIcon}
+                        />
+                      )}
+                    </button>
+                  </p>
+                </div>
+
+                <img
+                  src={recipe.imageUrl}
+                  alt={recipe.name}
+                  className={HOMECSS.foodImg}
+                />
+                <div className={HOMECSS.description}>
+                  <p>{recipe.description}</p>
+                </div>
+                <div>
                   <button
-                    onClick={() => saveRecipe(recipe._id)}
-                    disabled={isRecipeSaved(recipe._id)}
-                    className={HOMECSS.addBtn}
+                    onClick={() => openModal(recipe)}
+                    className={HOMECSS.view}
                   >
-                    {isRecipeSaved(recipe._id) ? (
-                      <MdBookmarkAdded size="30px" color="brown" />
-                    ) : (
-                      <MdBookmarkBorder size="30px" color="brown" />
-                    )}
+                    View Recipe
                   </button>
-                </p>
-              </div>
-
-              <img
-                src={recipe.imageUrl}
-                alt={recipe.name}
-                className={HOMECSS.foodImg}
-              />
-              <div className={HOMECSS.description}>
-                <p>{recipe.description}</p>
-              </div>
-              <div>
-                <button
-                  onClick={() => openModal(recipe)}
-                  className={HOMECSS.view}
-                >
-                  View Recipe
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
         <div>
           <Modal
             open={open}
@@ -201,26 +209,31 @@ export const Home = () => {
               {modalData && (
                 <>
                   <div className={HOMECSS.divs}>
-                    <h2>{modalData.name}</h2>
+                    <h2 className={HOMECSS.name}>{modalData.name}</h2>
                     <img
                       src={modalData.imageUrl}
                       alt={modalData.name}
                       style={{ maxWidth: "100%" }}
                     />
-                    <p> Cooking Time: {modalData.cookingTime} (minutes)</p>
+                    <p className={HOMECSS.time}>
+                      Cooking Time: {modalData.cookingTime} (minutes)
+                    </p>
                   </div>
 
                   <div className={HOMECSS.divs}>
                     <h3>Ingredients</h3>
-                    <ul className={HOMECSS.lst}>
+                    <ul>
                       {modalData.ingredients.map((ingredient, index) => (
-                        <li key={index}>
+                        <li key={index} className={HOMECSS.chklist}>
                           <input
                             value={ingredient}
+                            id={ingredient}
                             type="checkbox"
                             className={HOMECSS.chk}
                           />
-                          <label>{ingredient}</label>
+                          <label className={HOMECSS.lst} htmlFor={ingredient}>
+                            {ingredient}
+                          </label>
                         </li>
                       ))}
                     </ul>
@@ -230,7 +243,9 @@ export const Home = () => {
                     <h3>Instructions</h3>
                     <ol className={HOMECSS.instruct}>
                       {modalData.instructions.map((instruction, index) => (
-                        <li key={index}>{instruction}</li>
+                        <li key={index} className={HOMECSS.items}>
+                          {instruction}
+                        </li>
                       ))}
                     </ol>
                   </div>

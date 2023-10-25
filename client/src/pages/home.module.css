@@ -2,7 +2,7 @@
   border: 1px solid rgb(66, 36, 1);
   padding: 15px;
   border-radius: 12px;
-  margin: -25px 10px 50px 10px;
+  margin: -45px 10px 70px 10px;
   box-shadow: 6px 7px 5px rgba(66, 36, 1, 0.3);
   background-color: white;
 }
@@ -30,6 +30,8 @@ img {
   border-radius: 8px;
   width: 100%;
   color: white;
+  cursor: pointer;
+  font-weight: 600;
 }
 
 .foodImg {
@@ -53,6 +55,11 @@ img {
 
 .recipeHead {
   float: left;
+  padding: 0px;
+  margin: 0px;
+  font-variant: small-caps;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: rgb(49, 49, 49);
 }
 
 div::-webkit-scrollbar {
@@ -60,46 +67,70 @@ div::-webkit-scrollbar {
 }
 
 input[type="checkbox"]:checked + label {
-  color: rgb(143, 77, 2);
+  color: rgb(72, 71, 71);
   text-decoration: line-through;
 }
 
 .search {
   display: block;
   width: 100%;
-  margin: 0px 40px 0px 20px;
+}
+
+.fixedSearch {
+  position: fixed;
+  top: 100;
+  left: 10px;
+  right: 10px;
+  z-index: 1000;
 }
 
 .instruct {
-  padding: 5px 15px;
+  padding: 5px 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
 }
 
 .txtBox {
   float: right;
-  margin-right: 0px;
+  margin: 0px;
   margin-bottom: 0px;
   background-color: white;
-  border-radius: 8px;
+  border-radius: 0px 0px 8px 8px;
 }
+
 
 .icn {
   color: rgb(126, 77, 4);
 }
 
+.srch {
+  color: rgb(126, 77, 4);
+}
+
 .Head {
-  margin: 0px 10px 0px 10px;
-  padding-bottom: 35px;
+  margin: 55px 10px 0px 10px;
+  padding-bottom: 50px;
+  font-variant: small-caps;
+}
+
+.addIcon {
+  color: rgb(126, 77, 4);
+  cursor: pointer;
+}
+
+
+.addedIcon {
+  color: rgb(126, 77, 4);
 }
 
 .chk {
  margin: 0px 4px 0px 0px;
 }
 
-@media screen and (min-width: 480px) {
-  .mdl {
-   width: 400px;
-  }
+.chklist {
+  margin: 5px 0px;
 }
+
 
 .mdl {
   background-color: rgba(255, 255, 255);
@@ -114,22 +145,35 @@ input[type="checkbox"]:checked + label {
   min-width: 300px;
 }
 
-.divs, .lst {
+.divs {
 padding: 10px 0px;
+}
+
+.lst {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: lighter;
+  padding: 10px 0px;
+  cursor: pointer;
+}
+
+.items {
+  padding: 3px 0px;
 }
 
 .description {
   padding-bottom: 20px;
+  color: rgb(91, 90, 90);
 }
 
 .action {
   width: 100%;
   height: 100%;
-  padding: 10px;
+  padding: 0px;
 }
 
 .counter {
-  color: brown;
+  color:rgb(126, 77, 4);
   font-size: 19px;
   margin: 0px 0px -10px 0px;
 }
@@ -137,7 +181,45 @@ padding: 10px 0px;
 .ppl {
   padding: 0px 0px 0px 0px;
   margin: 0px 8px -10px 0px;
+  color: rgb(126, 77, 4);
+}
+
+.time {
+  color: rgb(91, 90, 90);
+}
+
+.name {
+  font-variant: small-caps;
+  margin: 0px;
+}
+
+@media screen and (min-width: 480px) {
+  .mdl {
+   width: 400px;
+  }
+
 }
 
 
+@media screen and (max-width: 480px) {  
+  .txtBox {
+    margin: 0px 0px;
+    display: flex;
+    float: center;
+    width: 100%;
 
+  }
+}
+
+.result {
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+}
+
+.errmsg {
+  display: flex;
+  width: 100%;
+  height: 40vh;
+  align-items:center;
+  justify-content: center;
+}
