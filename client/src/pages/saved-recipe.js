@@ -26,7 +26,7 @@ export const SavedRecipe = () => {
     const fetchSavedRecipe = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/recipes/savedRecipes/${userID}`
+          `https://kitchenkonnect.onrender.com/recipes/savedRecipes/${userID}`
         );
         setSavedRecipes(response.data.savedRecipes);
       } catch (err) {
@@ -51,7 +51,7 @@ export const SavedRecipe = () => {
   const deleteSavedRecipe = async (recipeId) => {
     try {
       await axios.delete(
-        `http://localhost:3001/recipes/savedRecipes/${userID}/${recipeId}`
+        `https://kitchenkonnect.onrender.com/recipes/savedRecipes/${userID}/${recipeId}`
       );
       setSavedRecipes(savedRecipes.filter((recipe) => recipe._id !== recipeId));
     } catch (err) {

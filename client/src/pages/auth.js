@@ -55,10 +55,13 @@ const Login = () => {
       return;
     }
     try {
-      const response = await axios.post("http://localhost:3001/auth/login", {
-        username,
-        password,
-      });
+      const response = await axios.post(
+        "https://kitchenkonnect.onrender.com/auth/login",
+        {
+          username,
+          password,
+        }
+      );
 
       setCookies("access_token", response.data.token);
       window.localStorage.setItem("userID", response.data.userID);
@@ -96,7 +99,7 @@ const Register = () => {
     }
 
     try {
-      await axios.post("http://localhost:3001/auth/register", {
+      await axios.post("https://kitchenkonnect.onrender.com/auth/register", {
         username,
         password,
       });

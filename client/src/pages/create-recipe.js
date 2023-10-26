@@ -118,9 +118,13 @@ export const CreateRecipe = () => {
 
     if (validateForm()) {
       try {
-        await axios.post("http://localhost:3001/recipes", recipe, {
-          headers: { authorization: cookies.access_token },
-        });
+        await axios.post(
+          "https://kitchenkonnect.onrender.com/recipes",
+          recipe,
+          {
+            headers: { authorization: cookies.access_token },
+          }
+        );
         alert("Recipe Created!");
         navigate("/");
       } catch (err) {
