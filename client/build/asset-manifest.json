@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "./static/css/main.652d108a.css",
+    "main.js": "./static/js/main.f1d9ead0.js",
+    "static/media/pexel.jpg": "./static/media/pexel.33c9c65ba2bb97a2a6bb.jpg",
+    "static/media/KK3white.png": "./static/media/KK3white.2492f1d070ea86ed95c6.png",
+    "static/media/KK3.png": "./static/media/KK3.058f0f4ab6506dd6e5b4.png",
+    "index.html": "./index.html",
+    "main.652d108a.css.map": "./static/css/main.652d108a.css.map",
+    "main.f1d9ead0.js.map": "./static/js/main.f1d9ead0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.652d108a.css",
+    "static/js/main.f1d9ead0.js"
+  ]
+}
