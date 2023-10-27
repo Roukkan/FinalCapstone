@@ -79,13 +79,14 @@ div::-webkit-scrollbar {
 }
 
 .instruct {
-  padding: 5px 15px;
+  padding: 5px 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
 }
 
 .search {
   display: block;
   width: 100%;
-  margin: 0px 40px 0px 20px;
 }
 
 @media screen and (min-width: 480px) {
@@ -100,7 +101,6 @@ div::-webkit-scrollbar {
     display: flex;
     float: center;
     width: 100%;
-
   }
 }
 

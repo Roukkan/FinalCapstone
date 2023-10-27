@@ -5,11 +5,7 @@ import { useCookies } from "react-cookie";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import SAVEDCSS from "./saved-recipe.module.css";
-import {
-  MdBookmarkAdded,
-  MdBookmarkBorder,
-  MdBookmarkRemove,
-} from "react-icons/md";
+import { MdBookmarkRemove } from "react-icons/md";
 import { TextField } from "@mui/material";
 import { MdSearch } from "react-icons/md";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -82,9 +78,7 @@ export const SavedRecipe = () => {
             placeholder="Search..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            variant="outlined"
             size="small"
-            margin="normal"
             className={SAVEDCSS.txtBox}
             InputProps={{
               startAdornment: (

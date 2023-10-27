@@ -50,6 +50,7 @@ const Login = () => {
 
   const onSubmit = async (event) => {
     event.preventDefault();
+
     if (!username || !password) {
       alert("Please fill in both fields.");
       return;
@@ -58,7 +59,7 @@ const Login = () => {
       const response = await axios.post(
         "https://kitchenkonnect.onrender.com/auth/login",
         {
-          username,
+          username: username.toLowerCase(),
           password,
         }
       );
